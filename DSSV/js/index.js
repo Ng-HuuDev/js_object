@@ -28,18 +28,29 @@ if (dataJson !== null) {
 function themSv() {
   var sv = layThongTinTuForm();
 
-  // kiem tra rong
-  kiemTraRong(sv.ma, "spanMaSV");
+  // kiem tra rong : validate truoc khi them
+  // bien idValid  de check xem user nhap vao co hop le khong
+  // &: thuc hien tat ca
+  // && : thuc hien den khi nao false thi se khong thuc hien nhung thang dang sau nua
+  var isValid =
+    (kiemTraRong(sv.ma, "spanMaSV") && kiemTraSo(sv.ma, "spanMaSV")) &
+    (kiemTraRong(sv.ten, "spanTenSV") && kiemTraTen(sv.ten, "spanTenSV")) &
+    (kiemTraRong(sv.email, "spanEmailSV") &&
+      kiemTraEmail(sv.email, "spanEmailSV")) &
+    kiemTraRong(sv.matKhau, "spanMatKhau");
 
+  // neu hop le,  thi thuc hien them sv vao DSSV va them vao local storage
   // them vao mang DSSV
-  DSSV.push(sv);
+  if (isValid) {
+    DSSV.push(sv);
 
-  // Luu xuong local storage
-  var dataJson = JSON.stringify(DSSV);
-  localStorage.setItem("DSSV_JSON", dataJson);
+    // Luu xuong local storage
+    var dataJson = JSON.stringify(DSSV);
+    localStorage.setItem("DSSV_JSON", dataJson);
 
-  // render ra DSSV
-  renderDSSV(DSSV);
+    // render ra DSSV
+    renderDSSV(DSSV);
+  }
 }
 // console.log("🚀 ~ themSv ~ DSSV:", DSSV);
 
