@@ -1,0 +1,18 @@
+lớp đối tượng trong ES6 
+
+ tạo lớp đối tượng miêu tả thông tin chung của mèo 
+
+function Cat(_name, _color){
+    this.name = _name;
+    this.color = _color;
+    this.speak= function(){
+        console.log("meo meo")
+    }
+}
+
+tao doi tuong tu lop doi tuong
+
+
+var cat1 = new Cat ("tom", "black")
+var cat2 = new Cat ("jerry", "white")
+
